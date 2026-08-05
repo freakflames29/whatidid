@@ -5,3 +5,8 @@
 - Prefers empty catch blocks (`catch {}`) when the caught error variable is unused, to satisfy ESLint no-unused-vars rules. Confidence: 0.7
 - Prefers git-native relative date references (`--since="midnight"`, `--since="7.days.ago"`) over programmatic date math when filtering commits, to avoid timezone boundary bugs. Confidence: 0.7
 - When debugging SDK/API integration issues, prefers consulting official documentation over reverse-engineering type definitions as the first step. Confidence: 0.6
+- Prefers extracting visual/animation/display logic into separate utility files so colors and effects can be tweaked later without touching business logic. Confidence: 0.8
+- Prefers blue-gradient color schemes for terminal UI effects (shimmer animations, loading spinners, etc.). Confidence: 0.3
+- Prefers orange-to-yellow ("warm") gradient color schemes for terminal UI effects like shimmer/loading animations — colors that "pop" against dark terminal backgrounds. Confidence: 0.8
+- Prefers minimal, direct terminal output — skips unnecessary decorative success messages or commentary between the loading indicator and the actual result. Confidence: 0.6
+- Enjoys playful, humorous loading/status messages in CLI tools — messages that "bring a smile" rather than dry technical status lines. Confidence: 0.8

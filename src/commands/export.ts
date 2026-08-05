@@ -7,6 +7,7 @@ import { getApiKey, getModel } from "../services/config.service.js";
 import { generateReport } from "../services/ai.service.js";
 import { formatReport, formatMarkdown, formatHtml } from "../services/output.service.js";
 import { logError, logSuccess } from "../utils/logger.js";
+import { startShimmer, stopShimmer } from "../utils/shimmer.js";
 
 export async function exportCommand(): Promise<void> {
   if (!isGitRepo()) {
@@ -37,7 +38,7 @@ export async function exportCommand(): Promise<void> {
     },
   ]);
 
-  const spinner = ora("Fetching commits and generating report...").start();
+  const spinner = ora("Fetching commits...").start();
 
   const commits = await getTodaysCommits();
   if (commits.length === 0) {
@@ -46,11 +47,14 @@ export async function exportCommand(): Promise<void> {
   }
 
   const projectName = getProjectName();
+  spinner.stop();
+
+  startShimmer();
 
   try {
     const report = await generateReport(commits, projectName, { apiKey, model });
 
-    spinner.succeed("Report generated");
+    stopShimmer();
 
     let output: string;
     let filename: string;
@@ -78,7 +82,7 @@ export async function exportCommand(): Promise<void> {
     fs.writeFileSync(filepath, output);
     logSuccess(`Exported to ${filepath}`);
   } catch (err) {
-    spinner.fail("Failed to generate report");
+    stopShimmer();
     logError(err instanceof Error ? err.message : "Unknown error");
     process.exit(1);
   }

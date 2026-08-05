@@ -4,6 +4,7 @@ import { getApiKey, getModel } from "../services/config.service.js";
 import { generateReport } from "../services/ai.service.js";
 import { formatReport } from "../services/output.service.js";
 import { logError } from "../utils/logger.js";
+import { startShimmer, stopShimmer } from "../utils/shimmer.js";
 
 export async function weekCommand(): Promise<void> {
   if (!isGitRepo()) {
@@ -34,17 +35,18 @@ export async function weekCommand(): Promise<void> {
   }
 
   const projectName = getProjectName();
+  spinner.stop();
 
-  spinner.text = "Generating weekly report with AI...";
+  startShimmer();
 
   try {
     const report = await generateReport(commits, projectName, { apiKey, model }, true);
 
-    spinner.succeed(`Weekly report generated from ${commits.length} commits`);
+    stopShimmer();
     console.log("");
     console.log(formatReport(report));
   } catch (err) {
-    spinner.fail("Failed to generate report");
+    stopShimmer();
     logError(err instanceof Error ? err.message : "Unknown error");
     process.exit(1);
   }
