@@ -13,3 +13,12 @@ export interface AIReport {
   project: string;
   tasks: string[];
 }
+
+export interface OpenRouterModel {
+  id: string;
+  name: string;
+  pricing?: {
+    prompt: string;
+    completion: string;
+  };
+}

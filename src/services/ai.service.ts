@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { OpenRouter } from "@openrouter/sdk";
-import type { AppConfig, AIReport, CommitInfo } from "../types/index.js";
+import type { AppConfig, AIReport, CommitInfo, OpenRouterModel } from "../types/index.js";
 import { AI_PROMPT_TEMPLATE, WEEKLY_PROMPT_TEMPLATE, MAX_RETRIES, RETRY_BASE_DELAY_MS } from "../constants/index.js";
 
 const aiReportSchema = z.object({
@@ -85,14 +85,15 @@ export async function generateReport(
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await client.chat.send({
-        model: config.model,
-        messages: [
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        stream: false,
+        chatRequest: {
+          model: config.model,
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        },
       });
 
       return await parseAIResponse(response);
@@ -125,4 +126,39 @@ export async function generateReport(
   }
 
   throw lastError ?? new Error("Failed to generate report after multiple attempts");
+}
+
+export async function fetchFreeModels(apiKey: string): Promise<OpenRouterModel[]> {
+  const response = await fetch("https://openrouter.ai/api/v1/models", {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch models: ${response.status} ${response.statusText}`);
+  }
+
+  const json = await response.json();
+  const data = json.data as Array<{
+    id: string;
+    name?: string;
+    pricing?: { prompt: string; completion: string };
+  }>;
+
+  const freeModels = data
+    .filter((m) => {
+      const isFreeSlug = m.id.endsWith(":free");
+      const isFreePriced =
+        m.pricing && (Number(m.pricing.prompt) === 0 && Number(m.pricing.completion) === 0);
+      return isFreeSlug || isFreePriced;
+    })
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .slice(0, 20);
+
+  return freeModels.map((m) => ({
+    id: m.id,
+    name: m.name ?? m.id,
+    pricing: m.pricing,
+  }));
 }

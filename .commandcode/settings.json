@@ -8,7 +8,10 @@
       "Shell(npm:*)",
       "Shell(npx tsup 2 >& 1)",
       "Shell(cd /Users/souravdsas/Documents/Developer/whatidid && ls node_modules/.package-lock.json 2>/dev/null; ls node_modules/typescript/package.json 2>/dev/null; ls node_modules/tsup/package.json 2>/dev/null)",
-      "Shell(rm:*)"
+      "Shell(rm:*)",
+      "Shell(cd /Users/souravdsas/Documents/Developer/whatidid && grep -r \"chat.send\\|chatRequest\\|chat\\.send\" node_modules/@openrouter/sdk/esm/index.js 2>/dev/null | head -5; echo \"===\"; find node_modules/@openrouter/sdk/esm -name \"*.d.ts\" | xargs grep -l \"chatRequest\\|chat\\.send\" 2>/dev/null | head -5)",
+      "Shell(grep -A20 \"clientOptions\\|ClientOptions\\|OpenRouterOptions\\|SdkOptions\\|options\\s*:\" node_modules/@openrouter/sdk/esm/sdk/sdk.js 2>/dev/null; echo \"===\"; grep -r \"SdkOptions\\|OpenRouterOptions\\|securitySource\\|security.*source\" node_modules/@openrouter/sdk/esm/lib/ --include=\"*.d.ts\" 2>/dev/null | head -10)",
+      "Shell(find node_modules/@openrouter/sdk -name \"*.d.ts\" | xargs grep -l \"securitySource\\|SecuritySource\\|security_source\" 2>/dev/null | head -5)"
     ],
     "deny": [],
     "defaultMode": "default"

@@ -13,18 +13,11 @@ export function getProjectName(): string {
   return path.basename(process.cwd());
 }
 
-function formatDate(date: Date): string {
-  return date.toISOString().split("T")[0];
-}
-
 export async function getTodaysCommits(): Promise<CommitInfo[]> {
   const git = simpleGit();
-  const today = formatDate(new Date());
 
   const log = await git.log({
-    "--since": `${today} 00:00:00`,
-    "--until": `${today} 23:59:59`,
-    "--format": "%H||%s||%ai",
+    "--since": "midnight",
     "--no-merges": null,
     maxCount: MAX_COMMITS,
   });
@@ -38,14 +31,9 @@ export async function getTodaysCommits(): Promise<CommitInfo[]> {
 
 export async function getWeeksCommits(): Promise<CommitInfo[]> {
   const git = simpleGit();
-  const today = new Date();
-  const sevenDaysAgo = new Date(today);
-  sevenDaysAgo.setDate(today.getDate() - 7);
 
   const log = await git.log({
-    "--since": `${formatDate(sevenDaysAgo)} 00:00:00`,
-    "--until": `${formatDate(today)} 23:59:59`,
-    "--format": "%H||%s||%ai",
+    "--since": "7.days.ago",
     "--no-merges": null,
     maxCount: MAX_WEEK_COMMITS,
   });
