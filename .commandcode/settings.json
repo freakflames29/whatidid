@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(node -e console.log(require('inquirer/package.json').version) 2 > /dev/null)",
+      "Shell(node -e import('inquirer/package.json', {with:{type:'json'}}).then(m => console.log(m.default.version)))",
+      "Shell(node --input-type=module -e  import inquirer from 'inquirer'; console.log(Object.keys(inquirer)); console.log(typeof inquirer.input); console.log(typeof inquirer.prompt); )",
+      "Shell(node --input-type=module -e import {program} from 'commander'; console.log(program.version('1.0.0').constructor.name); console.log(typeof program.command);)",
+      "Shell(npm:*)",
+      "Shell(npx tsup 2 >& 1)",
+      "Shell(cd /Users/souravdsas/Documents/Developer/whatidid && ls node_modules/.package-lock.json 2>/dev/null; ls node_modules/typescript/package.json 2>/dev/null; ls node_modules/tsup/package.json 2>/dev/null)",
+      "Shell(rm:*)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

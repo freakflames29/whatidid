@@ -1,0 +1,50 @@
+{
+  "name": "whatidid",
+  "version": "1.0.0",
+  "description": "Transform Git commit history into a clean, professional task report using AI",
+  "keywords": [
+    "git",
+    "cli",
+    "report",
+    "productivity",
+    "openrouter",
+    "ai"
+  ],
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "bin": {
+    "whatidid": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "format": "prettier --write 'src/**/*.ts'",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@openrouter/sdk": "^1.2.11",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "conf": "^13.1.0",
+    "inquirer": "^12.5.2",
+    "ora": "^8.2.0",
+    "simple-git": "^3.27.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.10",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.6",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.66.0",
+    "vitest": "^3.2.7"
+  }
+}
