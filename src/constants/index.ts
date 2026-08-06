@@ -1,5 +1,4 @@
 export const DEFAULT_MODEL = "openai/gpt-oss-20b";
-export const MAX_COMMITS = 5;
 export const MAX_WEEK_COMMITS = 20;
 export const MAX_RETRIES = 2;
 export const RETRY_BASE_DELAY_MS = 1000;

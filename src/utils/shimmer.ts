@@ -32,13 +32,13 @@ function colorForPosition(
 ): [number, number, number] {
   const wave = Math.sin(-frame * speed + position * 0.25) * 0.5 + 0.5;
 
-  const r = Math.floor(220 + wave * 35);
-  const g = Math.floor(100 + wave * 155);
-  const b = Math.floor(0 + wave * 60);
+  const r = Math.floor(132 + wave * 30);
+  const g = Math.floor(177 + wave * 26);
+  const b = Math.floor(121 + wave * 18);
 
   const shimmer = Math.sin(-frame * speed * 1.8 + position * 0.35) * 0.4 + 0.4;
 
-  return [Math.min(255, r + Math.floor(shimmer * 20)), Math.min(255, g + Math.floor(shimmer * 20)), Math.min(255, b + Math.floor(shimmer * 10))];
+  return [Math.min(255, r + Math.floor(shimmer * 10)), Math.min(255, g + Math.floor(shimmer * 10)), Math.min(255, b + Math.floor(shimmer * 10))];
 }
 
 class ShimmerSpinner {

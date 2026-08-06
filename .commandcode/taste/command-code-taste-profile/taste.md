@@ -7,6 +7,9 @@
 - When debugging SDK/API integration issues, prefers consulting official documentation over reverse-engineering type definitions as the first step. Confidence: 0.6
 - Prefers extracting visual/animation/display logic into separate utility files so colors and effects can be tweaked later without touching business logic. Confidence: 0.8
 - Prefers blue-gradient color schemes for terminal UI effects (shimmer animations, loading spinners, etc.). Confidence: 0.3
-- Prefers orange-to-yellow ("warm") gradient color schemes for terminal UI effects like shimmer/loading animations — colors that "pop" against dark terminal backgrounds. Confidence: 0.8
+- Prefers green-tinted gradient color schemes for terminal UI effects like shimmer/loading animations — explicitly chose #84B179 to #A2CB8B (soft green) range over previous orange/yellow. Confidence: 0.8
+- Prefers orange-to-yellow ("warm") gradient color schemes for terminal UI effects like shimmer/loading animations — colors that "pop" against dark terminal backgrounds. Confidence: 0.4
 - Prefers minimal, direct terminal output — skips unnecessary decorative success messages or commentary between the loading indicator and the actual result. Confidence: 0.6
 - Enjoys playful, humorous loading/status messages in CLI tools — messages that "bring a smile" rather than dry technical status lines. Confidence: 0.8
+- Prefers processing all available data (e.g., all of a day's commits) for AI-generated summaries rather than capping or sampling — favors completeness over artificial limits. Confidence: 0.7
+- Strongly privacy-conscious: insists CLI tools only operate on git commit metadata (messages, hashes, dates) and never read or transmit source code, file contents, or file paths — wants zero risk of code leaving the machine. Confidence: 0.9
