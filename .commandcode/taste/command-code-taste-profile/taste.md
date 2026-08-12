@@ -16,3 +16,4 @@
 - Strongly privacy-conscious: insists CLI tools only operate on git commit metadata (messages, hashes, dates) and never read or transmit source code, file contents, or file paths — wants zero risk of code leaving the machine. Confidence: 0.9
 - Prefers AI-generated output written in plain, simple, human English rather than polished, corporate, or "AI-sounding" language. Confidence: 0.9
 - Prefers filtering trivial/noise commits (typo fixes, variable renames, "graphify"/"graph update", etc.) out of generated reports so only meaningful work is surfaced. Confidence: 0.8
+- Prefers loading/status messages to rotate through different random options while a task runs, rather than sticking to a single initially-chosen message. Confidence: 0.7
