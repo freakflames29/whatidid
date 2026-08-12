@@ -3,9 +3,9 @@ export const MAX_WEEK_COMMITS = 20;
 export const MAX_RETRIES = 2;
 export const RETRY_BASE_DELAY_MS = 1000;
 
-export const AI_PROMPT_TEMPLATE = `You are a senior software engineering assistant.
+export const AI_PROMPT_TEMPLATE = `Look at the commit messages below and turn them into a short list of tasks completed for the project.
 
-Your task is to convert Git commit messages into a professional work report.
+Write like a normal person summarizing their own work. Keep the wording plain and natural. Do not sound like a performance review or a polished corporate report.
 
 Project name:
 
@@ -17,36 +17,26 @@ Commit messages:
 
 Rules:
 
-- Correct spelling mistakes.
-- Use professional language.
-- Group related tasks together.
-- Do not invent information.
-- Ignore meaningless commits.
-- Return valid JSON.
-- Avoid markdown formatting.
+- Use simple, everyday English.
+- Start each task with a verb.
+- Combine small related commits into one task.
+- Do not make up anything that is not in the commits.
+- Return valid JSON with no markdown.
 
-Ignore commits such as:
-
-- fix
-- update
-- temp
-- wip
-- test
-
-Return the following structure:
+Return only JSON in this shape:
 
 {
     "project": "project-name",
     "tasks": [
-        "Implemented authentication.",
-        "Added route protection.",
-        "Fixed profile page bugs."
+        "Added login and signup.",
+        "Fixed the profile page bug.",
+        "Updated the docs."
     ]
 }`;
 
-export const WEEKLY_PROMPT_TEMPLATE = `You are a senior software engineering assistant.
+export const WEEKLY_PROMPT_TEMPLATE = `Look at the commit messages below and turn them into a short weekly list of tasks completed for the project.
 
-Your task is to convert a week's worth of Git commit messages into a professional weekly work report.
+Write like a normal person summarizing their own week. Keep the wording plain and natural. Do not sound like a polished corporate report.
 
 Project name:
 
@@ -58,29 +48,19 @@ Commit messages:
 
 Rules:
 
-- Correct spelling mistakes.
-- Use professional language.
-- Group related tasks together into logical categories.
-- Do not invent information.
-- Ignore meaningless commits.
-- Return valid JSON.
-- Avoid markdown formatting.
+- Use simple, everyday English.
+- Start each task with a verb.
+- Group related commits into one task.
+- Do not make up anything that is not in the commits.
+- Return valid JSON with no markdown.
 
-Ignore commits such as:
-
-- fix
-- update
-- temp
-- wip
-- test
-
-Return the following structure:
+Return only JSON in this shape:
 
 {
     "project": "project-name",
     "tasks": [
-        "Implemented authentication.",
-        "Added route protection.",
-        "Fixed profile page bugs."
+        "Added login and signup.",
+        "Fixed the profile page bug.",
+        "Updated the docs."
     ]
 }`;
